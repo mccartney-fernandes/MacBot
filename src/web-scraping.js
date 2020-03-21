@@ -1,7 +1,7 @@
 const axios = require('axios')
 const cheerio = require('cheerio')
 
-const webScrap = async (message) => {
+const webScrapBible = async () => {
   const dataArray = []
   try {
     const { data } = await axios.get('https://store.steampowered.com/?l=portuguese')
@@ -16,4 +16,6 @@ const webScrap = async (message) => {
   }
 }
 
-module.exports = webScrap
+module.exports = {
+  webScrapBible
+}

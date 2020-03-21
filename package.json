@@ -4,7 +4,8 @@
   "description": "Bot para plataforma Discord, visando capitura novidades do jogo configurado no bot",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon ./src/index.js"
   },
   "repository": {
     "type": "git",
@@ -24,6 +25,7 @@
     "eslint-plugin-import": "^2.20.1",
     "eslint-plugin-node": "^11.0.0",
     "eslint-plugin-promise": "^4.2.1",
-    "eslint-plugin-standard": "^4.0.1"
+    "eslint-plugin-standard": "^4.0.1",
+    "nodemon": "^2.0.2"
   }
 }
