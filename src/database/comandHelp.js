@@ -1,5 +1,7 @@
 module.exports = [
   'Todos comandos do BotGameSteam\n',
+  '!play: url_youtube = executa musicas do youtube',
+  '!radio:pan = executa a radio Joven Pan',
   '!avatar = mostra o avatar do usuario',
   '!steam = mostra promoçoes da steam',
   '!img ou !img:cosplay = mostra imagens relativas á',
