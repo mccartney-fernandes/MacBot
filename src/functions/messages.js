@@ -1,4 +1,5 @@
 const axios = require('axios')
+const ytdl = require('ytdl-core-discord')
 const helpBot = require('../database/comandHelp')
 const { webScrapBible } = require('../web-scraping')
 const booksBible = require('../database/bibleBooks')
@@ -58,5 +59,41 @@ module.exports = async (client, message, msg, MessageAttachment) => {
   if (msg[0] === '!b') {
     const response = await axios.get(`https://bibleapi.co/api/verses/nvi/${msg[1]}/${msg[2]}/${msg[3]}`)
     message.reply(`${response.data.book.name} ${response.data.chapter}:${response.data.number} \n ${response.data.text}`)
+  }
+
+  if (msg[0] === '!play') {
+    if (msg.length >= 2) {
+      if (msg[2].includes('youtu') || msg[2].includes('youtube')) {
+        if (message.member.voice.channel) {
+          const connection = await message.member.voice.channel.join()
+          ytdl.getInfo(`https:${msg[2]}`, async (err, info) => {
+            if (err) throw err
+
+            const youtubeStream = await ytdl(`https:${msg[2]}`)
+            const dispatcher = connection.play(youtubeStream, { type: 'opus' })
+
+            dispatcher.on('start', async () => {
+              const attachment = new MessageAttachment('./src/assets/icon/play-music.png')
+              await message.channel.send(attachment)
+              await message.reply(`Play Musica: ${info.title} - com duração de: ${(info.length_seconds / 60).toFixed(2)}`)
+              if (info.related_videos) {
+                await message.channel.send('Videos relacionados')
+                for (const related of info.related_videos) {
+                  await message.channel.send(`Video: ${related.title}, URL: https://www.youtube.com/watch?v=${related.id}`)
+                }
+              }
+            })
+
+            dispatcher.on('finish', async () => {
+              const attachment = new MessageAttachment('./src/assets/icon/stop-music.png')
+              await message.channel.send(attachment)
+              await message.channel.send(`Stop Música: ${info.title}`)
+            })
+
+            dispatcher.on('error', console.error)
+          })
+        }
+      }
+    }
   }
 }

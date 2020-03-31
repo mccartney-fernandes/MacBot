@@ -25,7 +25,8 @@ client.on('message', async function (message) {
   if (!message.guild) return false
   if (message.author.equals(client.user)) return false
 
-  const msg = message.content.split(':')
+  const msgU = message.content.replace(' ', '')
+  const msg = msgU.split(':')
   messages(client, message, msg, MessageAttachment)
 })
 
