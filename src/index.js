@@ -27,6 +27,8 @@ client.on('message', async function (message) {
 
   const msgU = message.content.replace(' ', '')
   const msg = msgU.split(':')
+  console.log('index')
+  console.log(msg)
   messages(client, message, msg, MessageAttachment)
 })
 

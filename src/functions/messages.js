@@ -1,5 +1,5 @@
 const axios = require('axios')
-const ytdl = require('ytdl-core-discord')
+const ytdl = require('ytdl-core')
 const helpBot = require('../database/comandHelp')
 const { webScrapBible } = require('../web-scraping')
 const booksBible = require('../database/bibleBooks')
